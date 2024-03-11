@@ -2,21 +2,23 @@
 
 #pragma once
 
-#define MATRIX_ROWS 8
-#define MATRIX_COLS 5
+#define MATRIX_ROWS 10
+#define MATRIX_COLS 6
 
 #define DIRECT_PINS { \
-    { GP3,  GP29, GP2,   GP0,     NO_PIN }, \
-    { GP6,  GP26, GP27,  GP4,     GP28   }, \
-    { GP23, GP8,  GP20,  GP7,     GP22   }, \
-    { GP9,  GP14, GP21,  NO_PIN,  NO_PIN }  \
+    { NO_PIN, GP3,    GP29,    GP2,     GP0,    NO_PIN }, \
+    { GP23,   GP6,    GP26,    GP27,    GP4,    GP28   }, \
+    { NO_PIN, GP9,    GP8,     GP20,    GP7,    GP22   }, \
+    { NO_PIN, NO_PIN, NO_PIN,  GP14,    NO_PIN, NO_PIN }, \
+    { NO_PIN, NO_PIN, NO_PIN,  GP15,    GP16,   GP21   }  \
 }
 
 #define DIRECT_PINS_RIGHT {  \
-    { GP0,   GP29, GP2,  GP28,   NO_PIN }, \
-    { GP3,   GP27, GP4,  GP26,   GP5    }, \
-    { GP22,  GP6,  GP20, GP7,    GP23   }, \
-    { GP9,   GP21, GP8,  NO_PIN, NO_PIN }  \
+    { NO_PIN, GP0,    GP29,  GP2,     GP28,   NO_PIN }, \
+    { GP3,    GP27,   GP4,   GP26,    GP5,    GP23   }, \
+    { GP22,   GP6,    GP20,  GP7,     GP8,    NO_PIN }, \
+    { NO_PIN, NO_PIN, GP21,  NO_PIN,  NO_PIN, NO_PIN }, \
+    { GP9,    GP12,   GP13,  NO_PIN,  NO_PIN, NO_PIN }  \
 }
 
 

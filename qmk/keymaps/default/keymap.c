@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_ESC,        KC_F,          KC_R,              KC_M,                                                            KC_P,                  KC_U,                KC_B,          KC_BACKSPACE,
         KC_A,   LGUI_T(KC_W),  LALT_T(KC_A),  LSFT_T(KC_N),      LCTL_T(KC_T),         KC_V,                KC_J,                 RCTL_T(KC_S),          RSFT_T(KC_E),        LALT_T(KC_O),  RGUI_T(KC_K),   KC_B,
                 KC_X,          KC_Y,          LT(_GREEK, KC_Z),  LT(_LANG, KC_L),      KC_C,                KC_G,                 LT(_LANG, KC_D),       LT(_GREEK, KC_I),    KC_H,          KC_Q,
-                                              KC_C,                                                                                                      KC_D,
+                                              KC_DOT,                                                                                                    KC_COMMA,
                                               MO(_MOUSE),        MO(_NUM),             LT(_NAV, KC_ENTER),  LT(_BUTTONS, KC_SPC), MO(_SYMBOLS),          MO(_MEDIA)
     ),
     
@@ -90,34 +90,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NUM] = LAYOUT_split_46513(
-                 KC_TRNS,  XXXXXXX,   XXXXXXX,       KC_DEL,                                KC_7,          KC_8,          KC_9,          KC_TRNS,
-        XXXXXXX, KC_LGUI,  XX_CTLA,   KC_LSFT,       XX_TAB,   C(KC_V),        KC_PERCENT,  RCTL_T(KC_4),  RSFT_T(KC_5),  LALT_T(KC_6),  XX_PI,    XXXXXXX,
-                 C(KC_X),  C(KC_Y),   C(KC_Z),       C(KC_S),  C(KC_C),        KC_0,        KC_1,          KC_2,          KC_3,          XXXXXXX,
-                                      XXXXXXX,                                                             XXXXXXX,
-                                      KC_TRNS,       KC_TRNS,  KC_TRNS,        KC_COMMA,    KC_DOT,        KC_TRNS
+                 KC_TRNS,  KC_BACKSPACE,  XXXXXXX,       KC_DEL,                                KC_7,          KC_8,          KC_9,          KC_TRNS,
+        XXXXXXX, KC_LGUI,  XX_CTLA,       KC_LSFT,       XX_TAB,   C(KC_V),        KC_PERCENT,  RCTL_T(KC_4),  RSFT_T(KC_5),  LALT_T(KC_6),  XX_PI,    XXXXXXX,
+                 C(KC_X),  C(KC_Y),       C(KC_Z),       C(KC_S),  C(KC_C),        XXXXXXX,     KC_1,          KC_2,          KC_3,          XXXXXXX,
+                                          XXXXXXX,                                                             KC_0,
+                                          KC_TRNS,       KC_TRNS,  KC_TRNS,        XXXXXXX,     XXXXXXX,       KC_TRNS
     ),
 
    [_SYMBOLS] = LAYOUT_split_46513(
                  KC_TRNS,      KC_EQUAL,     KC_QUESTION,  KC_EXCLAIM,                                     KC_LEFT_BRACKET,      KC_RIGHT_BRACKET,      KC_GRAVE,         KC_TRNS,
         XXXXXXX, XX_AMPERSAND, XX_SLASH,     KC_MINUS,     XX_COLON,        KC_DOLLAR,     KC_CIRCUMFLEX,  XX_LEFT_PAREN,        KC_RIGHT_PAREN,        XX_DOUBLE_QUOTE,  XX_LEFT_ANGLE_BRACKET,   XXXXXXX,
                  KC_PIPE,      KC_ASTERISK,  KC_PLUS,      KC_SEMICOLON,    KC_BACKSLASH,  KC_TILDE,       KC_LEFT_CURLY_BRACE,  KC_RIGHT_CURLY_BRACE,  KC_QUOTE,         KC_RIGHT_ANGLE_BRACKET, 
-                                             XXXXXXX,                                                                            XXXXXXX,
+                                             KC_TRNS,                                                                            KC_TRNS,
                                              KC_AT,        KC_UNDERSCORE,   KC_HASH,       KC_TRNS,        KC_TRNS,              KC_TRNS
      ),
     
    [_GREEK] = LAYOUT_split_46513(
-                  KC_TRNS,      XX_GR_PHI,     XX_GR_RHO,           XX_GR_MU,                                   XX_GR_PI,       XX_GR_UPSILON,          XX_GR_BETA,     KC_TRNS,
-        XXXXXXX,  XX_GR_OMEGA,  XX_GR_ALPHA,   LSFT_T(XX_GR_NU),    XX_GR_TAU,      XXXXXXX,    XXXXXXX,        XX_GR_SIGMA,    RSFT_T(XX_GR_EPSILON),  XX_GR_OMICRON,  XX_GR_KAPPA,   XXXXXXX,
-                  XX_GR_XI,     XX_GR_PSI,     XX_GR_ZETA,          XX_GR_LAMDA,    XX_GR_CHI,  XX_GR_GAMMA,    XX_GR_DELTA,    XX_GR_IOTA,             XX_GR_ETA,      XX_GR_THETA,
-                                               XXXXXXX,                                                                         XXXXXXX,
-                                               KC_TRNS,             KC_TRNS,        KC_TRNS,     KC_TRNS,       KC_TRNS,        KC_TRNS
+                  KC_TRNS,      XX_GR_PHI,     XX_GR_RHO,   XX_GR_MU,                                   XX_GR_PI,       XX_GR_UPSILON,  XX_GR_BETA,     KC_TRNS,
+        XXXXXXX,  XX_GR_OMEGA,  XX_GR_ALPHA,   XX_GR_NU,    XX_GR_TAU,      XXXXXXX,    XXXXXXX,        XX_GR_SIGMA,    XX_GR_EPSILON,  XX_GR_OMICRON,  XX_GR_KAPPA,   XXXXXXX,
+                  XX_GR_XI,     XX_GR_PSI,     XX_GR_ZETA,  XX_GR_LAMDA,    XX_GR_CHI,  XX_GR_GAMMA,    XX_GR_DELTA,    XX_GR_IOTA,     XX_GR_ETA,      XX_GR_THETA,
+                                               XXXXXXX,                                                                 XXXXXXX,
+                                               KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS,       KC_TRNS,        KC_TRNS
      ),
     
     [_BUTTONS] = LAYOUT_split_46513(
                  KC_TRNS,  KC_ESC,           QK_CAPS_WORD_TOGGLE,  KC_CAPS_LOCK,                        KC_F7,          KC_F8,          KC_F9,          KC_TRNS,
-        XXXXXXX, KC_LGUI,  KC_LALT,          KC_LSFT,              KC_LCTL,       XXXXXXX,  XXXXXXX,    RCTL_T(KC_F4),  RSFT_T(KC_F5),  LALT_T(KC_F6),  KC_F11,   XXXXXXX,
-                 XXXXXXX,  KC_PRINT_SCREEN,  KC_EXECUTE,           KC_HELP,       XXXXXXX,  KC_F10,     KC_F1,          KC_F2,          KC_F3,          KC_F12,
-                                             XXXXXXX,                                                                   XXXXXXX,
+        XXXXXXX, KC_LGUI,  KC_LALT,          KC_LSFT,              KC_LCTL,       XXXXXXX,  KC_F12,    RCTL_T(KC_F4),  RSFT_T(KC_F5),  LALT_T(KC_F6),   XXXXXXX,   XXXXXXX,
+                 XXXXXXX,  KC_PRINT_SCREEN,  KC_EXECUTE,           KC_HELP,       XXXXXXX,  KC_F11,     KC_F1,          KC_F2,          KC_F3,          XXXXXXX,
+                                             XXXXXXX,                                                                   KC_F10,
                                              KC_TRNS,              KC_TRNS,       KC_TRNS,  KC_TRNS,    KC_TRNS,        KC_TRNS
     ),
 
@@ -577,7 +577,7 @@ bool oled_task_user(void) {
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCROLL") : PSTR(""),     false);
         
         oled_set_cursor(0, 0);
-        oled_write_P(PSTR("PFM v.034"), false);
+        oled_write_P(PSTR("PFM v.035"), false);
 
         oled_set_cursor(0, 1);
         oled_write_P(PSTR("Layer: "), false);

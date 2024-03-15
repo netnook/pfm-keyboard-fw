@@ -7,6 +7,7 @@ enum pfm_layers {
   _LANG,
   _NUM,
   _SYMBOLS,
+  _GREEK,
   _BUTTONS,
   _NAV,
   _MEDIA,
@@ -21,6 +22,31 @@ enum custom_keycodes {
     XX_WS_LEFT,
     XX_WS_RIGHT,
     XX_BOX_DR,
+
+    XX_GR_ALPHA,
+    XX_GR_BETA,
+    XX_GR_GAMMA,
+    XX_GR_DELTA,
+    XX_GR_EPSILON,
+    XX_GR_ZETA,
+    XX_GR_ETA,
+    XX_GR_THETA,
+    XX_GR_IOTA,
+    XX_GR_KAPPA,
+    XX_GR_LAMDA,
+    XX_GR_MU,
+    XX_GR_NU,
+    XX_GR_XI,
+    XX_GR_OMICRON,
+    XX_GR_PI,
+    XX_GR_RHO,
+    XX_GR_SIGMA,
+    XX_GR_TAU,
+    XX_GR_UPSILON,
+    XX_GR_PHI,
+    XX_GR_CHI,
+    XX_GR_PSI,
+    XX_GR_OMEGA,
 };
 
 #define XX_EURO           RSFT_T(KC_LANGUAGE_1)
@@ -48,11 +74,11 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ALPHA] = LAYOUT_split_46513(
-                KC_ESC,        KC_F,          KC_R,           KC_M,                                                            KC_P,                  KC_U,                KC_B,          KC_BACKSPACE,
-        KC_A,   LGUI_T(KC_W),  LALT_T(KC_A),  LSFT_T(KC_N),   LCTL_T(KC_T),         KC_V,                KC_J,                 RCTL_T(KC_S),          RSFT_T(KC_E),        LALT_T(KC_O),  RGUI_T(KC_K),   KC_B,
-                KC_X,          KC_Y,          KC_Z,           LT(_LANG, KC_L),      KC_C,                KC_G,                 LT(_LANG, KC_D),       KC_I,                KC_H,          KC_Q,
-                                              KC_C,                                                                                                   KC_D,
-                                              MO(_MOUSE),     MO(_NUM),             LT(_NAV, KC_ENTER),  LT(_BUTTONS, KC_SPC), MO(_SYMBOLS),          MO(_MEDIA)
+                KC_ESC,        KC_F,          KC_R,              KC_M,                                                            KC_P,                  KC_U,                KC_B,          KC_BACKSPACE,
+        KC_A,   LGUI_T(KC_W),  LALT_T(KC_A),  LSFT_T(KC_N),      LCTL_T(KC_T),         KC_V,                KC_J,                 RCTL_T(KC_S),          RSFT_T(KC_E),        LALT_T(KC_O),  RGUI_T(KC_K),   KC_B,
+                KC_X,          KC_Y,          LT(_GREEK, KC_Z),  LT(_LANG, KC_L),      KC_C,                KC_G,                 LT(_LANG, KC_D),       LT(_GREEK, KC_I),    KC_H,          KC_Q,
+                                              KC_C,                                                                                                      KC_D,
+                                              MO(_MOUSE),        MO(_NUM),             LT(_NAV, KC_ENTER),  LT(_BUTTONS, KC_SPC), MO(_SYMBOLS),          MO(_MEDIA)
     ),
     
     [_LANG] = LAYOUT_split_46513(
@@ -78,7 +104,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              XXXXXXX,                                                                            XXXXXXX,
                                              KC_AT,        KC_UNDERSCORE,   KC_HASH,       KC_TRNS,        KC_TRNS,              KC_TRNS
      ),
-
+    
+   [_GREEK] = LAYOUT_split_46513(
+                  KC_TRNS,      XX_GR_PHI,     XX_GR_RHO,           XX_GR_MU,                                   XX_GR_PI,       XX_GR_UPSILON,          XX_GR_BETA,     KC_TRNS,
+        XXXXXXX,  XX_GR_OMEGA,  XX_GR_ALPHA,   LSFT_T(XX_GR_NU),    XX_GR_TAU,      XXXXXXX,    XXXXXXX,        XX_GR_SIGMA,    RSFT_T(XX_GR_EPSILON),  XX_GR_OMICRON,  XX_GR_KAPPA,   XXXXXXX,
+                  XX_GR_XI,     XX_GR_PSI,     XX_GR_ZETA,          XX_GR_LAMDA,    XX_GR_CHI,  XX_GR_GAMMA,    XX_GR_DELTA,    XX_GR_IOTA,             XX_GR_ETA,      XX_GR_THETA,
+                                               XXXXXXX,                                                                         XXXXXXX,
+                                               KC_TRNS,             KC_TRNS,        KC_TRNS,     KC_TRNS,       KC_TRNS,        KC_TRNS
+     ),
+    
     [_BUTTONS] = LAYOUT_split_46513(
                  KC_TRNS,  KC_ESC,           QK_CAPS_WORD_TOGGLE,  KC_CAPS_LOCK,                        KC_F7,          KC_F8,          KC_F9,          KC_TRNS,
         XXXXXXX, KC_LGUI,  KC_LALT,          KC_LSFT,              KC_LCTL,       XXXXXXX,  XXXXXXX,    RCTL_T(KC_F4),  RSFT_T(KC_F5),  LALT_T(KC_F6),  KC_F11,   XXXXXXX,
@@ -281,6 +315,249 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case XX_BOX_DR:
             if (record->tap.count && record->event.pressed) {
                 SEND_STRING(SS_LCTL(SS_LSFT("u"))"250c "); // ┌
+                return false;
+            }
+            return true;
+
+
+        // Greek            
+        case XX_GR_ALPHA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0391 "); // GREEK CAPITAL LETTER ALPHA (U+0391)	Α	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B1 "); // GREEK SMALL LETTER ALPHA (U+03B1)	α	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_BETA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0392 "); // GREEK CAPITAL LETTER BETA (U+0392)	Β	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B2 "); // GREEK SMALL LETTER BETA (U+03B2)	β	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_GAMMA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0393 "); // GREEK CAPITAL LETTER GAMMA (U+0393)	Γ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B3 "); // GREEK SMALL LETTER GAMMA (U+03B3)	γ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_DELTA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0394 "); // GREEK CAPITAL LETTER DELTA (U+0394)	Δ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B4 "); // GREEK SMALL LETTER DELTA (U+03B4)	δ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_EPSILON:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0395 "); // GREEK CAPITAL LETTER EPSILON (U+0395)	Ε	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B5 "); // GREEK SMALL LETTER EPSILON (U+03B5)	ε	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_ZETA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0396 "); // GREEK CAPITAL LETTER ZETA (U+0396)	Ζ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B6 "); // GREEK SMALL LETTER ZETA (U+03B6)	ζ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_ETA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0397 "); // GREEK CAPITAL LETTER ETA (U+0397)	Η	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B7 "); // GREEK SMALL LETTER ETA (U+03B7)	η	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_THETA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0398 "); // GREEK CAPITAL LETTER THETA (U+0398)	Θ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B8 "); // GREEK SMALL LETTER THETA (U+03B8)	θ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_IOTA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"0399 "); // GREEK CAPITAL LETTER IOTA (U+0399)	Ι	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03B9 "); // GREEK SMALL LETTER IOTA (U+03B9)	ι	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_KAPPA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"039A "); // GREEK CAPITAL LETTER KAPPA (U+039A)	Κ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03BA "); // GREEK SMALL LETTER KAPPA (U+03BA)	κ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_LAMDA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"039B "); // GREEK CAPITAL LETTER LAMDA (U+039B)	Λ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03BB "); // GREEK SMALL LETTER LAMDA (U+03BB)	λ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_MU:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"039C "); // GREEK CAPITAL LETTER MU (U+039C)	Μ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03BC "); // GREEK SMALL LETTER MU (U+03BC)	μ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_NU:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"039D "); // GREEK CAPITAL LETTER NU (U+039D)	Ν	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03BD "); // GREEK SMALL LETTER NU (U+03BD)	ν	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_XI:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"039E "); // GREEK CAPITAL LETTER XI (U+039E)	Ξ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03BE "); // GREEK SMALL LETTER XI (U+03BE)	ξ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_OMICRON:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"039F "); // GREEK CAPITAL LETTER OMICRON (U+039F)	Ο	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03BF "); // GREEK SMALL LETTER OMICRON (U+03BF)	ο	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_PI:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A0 "); // GREEK CAPITAL LETTER PI (U+03A0)	Π	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C0 "); // GREEK SMALL LETTER PI (U+03C0)	π	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_RHO:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A1 "); // GREEK CAPITAL LETTER RHO (U+03A1)	Ρ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C1 "); // GREEK SMALL LETTER RHO (U+03C1)	ρ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_SIGMA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A3 "); // GREEK CAPITAL LETTER SIGMA (U+03A3)	Σ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C3 "); // GREEK SMALL LETTER SIGMA (U+03C3)	σ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_TAU:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A4 "); // GREEK CAPITAL LETTER TAU (U+03A4)	Τ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C4 "); // GREEK SMALL LETTER TAU (U+03C4)	τ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_UPSILON:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A5 "); // GREEK CAPITAL LETTER UPSILON (U+03A5)	Υ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C5 "); // GREEK SMALL LETTER UPSILON (U+03C5)	υ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_PHI:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A6 "); // GREEK CAPITAL LETTER PHI (U+03A6)	Φ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C6 "); // GREEK SMALL LETTER PHI (U+03C6)	φ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_CHI:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A7 "); // GREEK CAPITAL LETTER CHI (U+03A7)	Χ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C7 "); // GREEK SMALL LETTER CHI (U+03C7)	χ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_PSI:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A8 "); // GREEK CAPITAL LETTER PSI (U+03A8)	Ψ	arial_unicode_ms
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C8 "); // GREEK SMALL LETTER PSI (U+03C8)	ψ	arial_unicode_ms
+                }
+                return false;
+            }
+            return true;
+        case XX_GR_OMEGA:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03A9 "); // GREEK CAPITAL LETTER OMEGA (U+03A9)
+                } else {
+                    SEND_STRING(SS_LCTL(SS_LSFT("u"))"03C9 "); // GREEK SMALL LETTER OMEGA (U+03C9)
+                }
                 return false;
             }
             return true;

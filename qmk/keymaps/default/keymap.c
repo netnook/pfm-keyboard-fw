@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, KC_LGUI,  XX_CTLA,       KC_LSFT,       XX_TAB,   C(KC_V),        KC_PERCENT,  RCTL_T(KC_4),  RSFT_T(KC_5),  LALT_T(KC_6),  XX_PI,    XXXXXXX,
                  C(KC_X),  C(KC_Y),       C(KC_Z),       C(KC_S),  C(KC_C),        XXXXXXX,     KC_1,          KC_2,          KC_3,          XXXXXXX,
                                           XXXXXXX,                                                             KC_0,
-                                          KC_TRNS,       KC_TRNS,  KC_TRNS,        XXXXXXX,     XXXXXXX,       KC_TRNS
+                                          KC_TRNS,       KC_TRNS,  KC_TRNS,        KC_COMMA,    KC_DOT,        KC_TRNS
     ),
 
    [_SYMBOLS] = LAYOUT_split_46513(
@@ -577,7 +577,7 @@ bool oled_task_user(void) {
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCROLL") : PSTR(""),     false);
         
         oled_set_cursor(0, 0);
-        oled_write_P(PSTR("PFM v.035"), false);
+        oled_write_P(PSTR("PFM v.036"), false);
 
         oled_set_cursor(0, 1);
         oled_write_P(PSTR("Layer: "), false);

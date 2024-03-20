@@ -56,12 +56,12 @@ enum custom_keycodes {
 #define XX_TAB            LCTL_T(KC_INTERNATIONAL_1)
 #define XX_PI             RGUI_T(KC_INTERNATIONAL_1)
 
-#define XX_AMPERSAND            LGUI_T(KC_INTERNATIONAL_2)
-#define XX_SLASH                LALT_T(KC_INTERNATIONAL_2)
-#define XX_COLON                LCTL_T(KC_INTERNATIONAL_2)
-#define XX_LEFT_PAREN           RCTL_T(KC_INTERNATIONAL_2)
-#define XX_DOUBLE_QUOTE         RALT_T(KC_INTERNATIONAL_2)
-#define XX_LEFT_ANGLE_BRACKET   RGUI_T(KC_INTERNATIONAL_2)
+#define XX_AMPERSAND       LGUI_T(KC_INTERNATIONAL_2)
+#define XX_SLASH           LALT_T(KC_INTERNATIONAL_2)
+#define XX_COLON           LCTL_T(KC_INTERNATIONAL_2)
+#define XX_LEFT_PAREN      RCTL_T(KC_INTERNATIONAL_2)
+#define XX_DOUBLE_QUOTE    RALT_T(KC_INTERNATIONAL_2)
+#define XX_TILDE           RGUI_T(KC_INTERNATIONAL_2)
 
 #define XX_WS1           RCTL_T(KC_INTERNATIONAL_5)
 #define XX_WS2           RSFT_T(KC_INTERNATIONAL_5)
@@ -98,13 +98,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
    [_SYMBOLS] = LAYOUT_split_46513(
-                 KC_TRNS,      KC_EQUAL,     KC_QUESTION,  KC_EXCLAIM,                                     KC_LEFT_BRACKET,      KC_RIGHT_BRACKET,      KC_GRAVE,         KC_TRNS,
-        KC_TRNS, XX_AMPERSAND, XX_SLASH,     KC_MINUS,     XX_COLON,        KC_DOLLAR,     KC_CIRCUMFLEX,  XX_LEFT_PAREN,        KC_RIGHT_PAREN,        XX_DOUBLE_QUOTE,  XX_LEFT_ANGLE_BRACKET,   KC_TRNS,
-                 KC_PIPE,      KC_ASTERISK,  KC_PLUS,      KC_SEMICOLON,    KC_BACKSLASH,  KC_TILDE,       KC_LEFT_CURLY_BRACE,  KC_RIGHT_CURLY_BRACE,  KC_QUOTE,         KC_RIGHT_ANGLE_BRACKET, 
-                                             KC_TRNS,                                                                            KC_TRNS,
-                                             KC_AT,        KC_UNDERSCORE,   KC_HASH,       KC_TRNS,        KC_TRNS,              KC_TRNS
+                 KC_TRNS,      KC_EQUAL,     KC_QUESTION,  KC_EXCLAIM,                                               KC_LEFT_BRACKET,      KC_RIGHT_BRACKET,      KC_GRAVE,         KC_TRNS,
+        KC_TRNS, XX_AMPERSAND, XX_SLASH,     KC_MINUS,     XX_COLON,        KC_DOLLAR,     KC_LEFT_ANGLE_BRACKET,    XX_LEFT_PAREN,        KC_RIGHT_PAREN,        XX_DOUBLE_QUOTE,  XX_TILDE,       KC_TRNS,
+                 KC_PIPE,      KC_ASTERISK,  KC_PLUS,      KC_SEMICOLON,    KC_BACKSLASH,  KC_RIGHT_ANGLE_BRACKET,   KC_LEFT_CURLY_BRACE,  KC_RIGHT_CURLY_BRACE,  KC_QUOTE,         KC_CIRCUMFLEX,
+                                             KC_TRNS,                                                                                      KC_TRNS,
+                                             KC_AT,        KC_UNDERSCORE,   KC_HASH,       KC_TRNS,                  KC_TRNS,              KC_TRNS
      ),
-    
+
    [_GREEK] = LAYOUT_split_46513(
                   KC_TRNS,      XX_GR_PHI,     XX_GR_RHO,   XX_GR_MU,                                   XX_GR_PI,       XX_GR_UPSILON,  XX_GR_BETA,     KC_TRNS,
         KC_TRNS,  XX_GR_OMEGA,  XX_GR_ALPHA,   XX_GR_NU,    XX_GR_TAU,      XXXXXXX,    XXXXXXX,        XX_GR_SIGMA,    XX_GR_EPSILON,  XX_GR_OMICRON,  XX_GR_KAPPA,   KC_TRNS,
@@ -285,9 +285,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;
-        case XX_LEFT_ANGLE_BRACKET:
+        case XX_TILDE:
             if (record->tap.count && record->event.pressed) {
-                tap_code16(KC_LEFT_ANGLE_BRACKET);
+                tap_code16(KC_TILDE);
                 return false;
             }
             return true;
@@ -577,7 +577,7 @@ bool oled_task_user(void) {
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCROLL") : PSTR(""),     false);
         
         oled_set_cursor(0, 0);
-        oled_write_P(PSTR("PFM v.037"), false);
+        oled_write_P(PSTR("PFM v.038"), false);
 
         oled_set_cursor(0, 1);
         oled_write_P(PSTR("Layer: "), false);
